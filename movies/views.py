@@ -1,14 +1,26 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Genre
 
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello world of Django")
+    # read data from db
+    genres = Genre.objects.all()
+
+    """
+    get all: Class.objects.all()
+    id:Class.objcts.get(id=1)
+
+    filter:
+    """
+
+    # send data and render
+    return render(request, 'views/index.html', {'title': 'Index Page', 'items': genres})
 
 
 def welcome(request):
-    return HttpResponse("Hello I am Welcome Page! :) ")
+    return render(request, 'views/welcome.html', {'title': 'Welcome', 'rows': 2})
 
 def myname(request):
     return HttpResponse("Hello my name is Kleibert! :D ")
